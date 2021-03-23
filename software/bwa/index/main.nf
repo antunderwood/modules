@@ -29,7 +29,9 @@ process BWA_INDEX {
     def software = getSoftwareName(task.process)
     """
     mkdir bwa
-    bwa index $options.args $fasta -p bwa/${fasta.baseName}
+    cd bwa
+    bwa index $options.args $fasta -p ${fasta.baseName}
+    cd ..
     echo \$(bwa 2>&1) | sed 's/^.*Version: //; s/Contact:.*\$//' > ${software}.version.txt
     """
 }
